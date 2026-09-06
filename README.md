@@ -59,3 +59,7 @@ pagamento) → `finalizacao.html` (resumo + confirmação via WhatsApp).
 - O carrinho e o pedido usam `localStorage` com fallback em memória caso o
   navegador bloqueie o armazenamento local — nesse caso, os dados não
   persistem ao recarregar a página.
+
+  ## Página web
+
+  - https://bruno-mkti.github.io/web-forno-bella/

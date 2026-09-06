@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar pedido — Forno Bella</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Forno Bella
+        <span class="brand-sub">PIZZARIA &amp; COZINHA DE BAIRRO</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="index.html#cardapio">Cardápio</a>
+      <a href="agendamento.html">Retirar marmita</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button type="button" class="cart-btn" data-open-cart>
+        🛒 Carrinho <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Finalizar pedido</h1>
+      <p>Revise seus itens, escolha entrega ou retirada e confirme a forma de pagamento.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div id="checkout-empty" class="empty-state" style="display:none;">
+        <p style="font-size:2.4rem;">🛒</p>
+        <h3>Seu carrinho está vazio</h3>
+        <p class="muted">Volte ao cardápio para adicionar pizzas, marmitas ou bebidas ao seu pedido.</p>
+        <a href="index.html#cardapio" class="btn btn-primary">Ver cardápio</a>
+      </div>
+
+      <div class="two-col" id="checkout-content">
+        <form id="form-checkout" novalidate>
+
+          <h3>Entrega ou retirada</h3>
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="entrega" value="retirada" checked>
+              <span><strong>Retirar no balcão</strong><span>Pronto em ~20 minutos</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="entrega" value="entrega">
+              <span><strong>Entrega</strong><span>Taxa de R$ 8,90 · ~40 minutos</span></span>
+            </label>
+          </div>
+
+          <div id="campos-endereco" style="margin-top:18px; display:none;">
+            <div class="field">
+              <label for="ck-endereco">Endereço completo</label>
+              <input type="text" id="ck-endereco" placeholder="Rua, número, complemento">
+              <p class="field-error">Informe um endereço válido.</p>
+            </div>
+            <div class="field">
+              <label for="ck-bairro">Bairro</label>
+              <input type="text" id="ck-bairro">
+              <p class="field-error">Informe o bairro.</p>
+            </div>
+          </div>
+
+          <h3>Seus dados</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="ck-nome">Nome completo</label>
+              <input type="text" id="ck-nome" required>
+              <p class="field-error">Informe seu nome completo.</p>
+            </div>
+            <div class="field">
+              <label for="ck-telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="ck-telefone" placeholder="(11) 99999-9999" required>
+              <p class="field-error">Informe um telefone válido.</p>
+            </div>
+          </div>
+
+          <h3>Forma de pagamento</h3>
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="pagamento" value="pix">
+              <span><strong>Pix</strong><span>Chave enviada após confirmar</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="pagamento" value="cartao">
+              <span><strong>Cartão</strong><span>Crédito ou débito na entrega</span></span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="pagamento" value="dinheiro">
+              <span><strong>Dinheiro</strong><span>Troco combinado na entrega</span></span>
+            </label>
+          </div>
+
+          <div class="field" style="margin-top:18px;">
+            <label for="ck-observacoes">Observações (opcional)</label>
+            <textarea id="ck-observacoes" rows="3" placeholder="Ex.: ponto da carne, sem cebola, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Confirmar pedido</button>
+        </form>
+
+        <aside class="sticky-col">
+          <div class="ticket">
+            <h3 style="margin-bottom:12px;">Resumo do pedido</h3>
+            <div id="resumo-itens"></div>
+            <div class="ticket-perforation"></div>
+            <div class="ticket-row"><span class="ticket-label">Subtotal</span><span id="resumo-subtotal">R$ 0,00</span></div>
+            <div class="ticket-row" id="linha-entrega" style="display:none;"><span class="ticket-label">Entrega</span><span id="resumo-entrega">R$ 0,00</span></div>
+            <div class="ticket-perforation"></div>
+            <div class="ticket-row total"><span>Total</span><span id="resumo-total">R$ 0,00</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">© 2026 Forno Bella Pizzaria &amp; Cozinha de Bairro. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-head">
+    <h3>Seu pedido</h3>
+    <button type="button" class="cart-close" id="cart-close" aria-label="Fechar carrinho">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-drawer-foot" id="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">R$ 0,00</span></div>
+    <a href="checkout.html" class="btn btn-primary btn-block">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/order.js"></script>
+<script src="js/whatsapp.js"></script>
+<script src="js/main.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

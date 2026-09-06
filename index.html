@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forno Bella — Pizzaria & Cozinha de Bairro</title>
+<meta name="description" content="Pizzas artesanais no forno a lenha, marmitas para retirada e entrega. Peça online ou agende a retirada da sua marmita.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Forno Bella
+        <span class="brand-sub">PIZZARIA &amp; COZINHA DE BAIRRO</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="index.html" aria-current="page">Início</a>
+      <a href="index.html#cardapio">Cardápio</a>
+      <a href="agendamento.html">Retirar marmita</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button type="button" class="cart-btn" data-open-cart>
+        🛒 Carrinho <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="hero-eyebrow-line"><span class="dot"></span> Forno aceso desde as 11h</div>
+        <h1>Pizza de forno a lenha e marmitas feitas com calma, todo dia.</h1>
+        <p class="lead">Massa de fermentação longa, ingredientes frescos e marmitas prontas para retirar no horário que você escolher — sem fila, sem espera.</p>
+        <div class="hero-actions">
+          <a href="#cardapio" class="btn btn-primary">Ver cardápio</a>
+          <a href="agendamento.html" class="btn btn-ghost">Agendar retirada de marmita</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>18min</strong><span>tempo médio de forno</span></div>
+          <div><strong>4.9★</strong><span>avaliação dos clientes</span></div>
+          <div><strong>+12</strong><span>sabores de pizza</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="pizza-plate"></div>
+        <div class="pizza-base"></div>
+        <div class="pizza-slice-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDÁPIO -->
+  <section class="section section-paper" id="cardapio">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Nosso cardápio</h2>
+          <p>Escolha uma categoria e monte seu pedido. Tudo pode ser retirado no balcão ou entregue no seu endereço.</p>
+        </div>
+      </div>
+
+      <div class="menu-tabs" id="menu-tabs" role="tablist" aria-label="Categorias do cardápio"></div>
+      <div class="menu-list" id="menu-list"></div>
+    </div>
+  </section>
+
+  <!-- CTA MARMITAS -->
+  <section class="section section-dark">
+    <div class="wrap" style="display:grid; grid-template-columns: 1.2fr .8fr; gap:32px; align-items:center;">
+      <div>
+        <h2>Marmita pronta, no horário que você escolher</h2>
+        <p style="color:rgba(242,233,220,0.8); max-width:52ch;">
+          Agende o dia e o horário de retirada da sua marmita e evite espera no balcão.
+          Ideal para o almoço do trabalho ou o jantar de casa.
+        </p>
+        <a href="agendamento.html" class="btn btn-primary">Agendar retirada agora</a>
+      </div>
+      <div style="text-align:center; font-size:5rem;" aria-hidden="true">🍱</div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="section section-paper" id="sobre">
+    <div class="wrap" style="display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center;">
+      <div>
+        <h2>Uma cozinha de bairro, com técnica de trattoria</h2>
+        <p class="muted">Há mais de 12 anos assando pizzas em forno a lenha de tijolos, com massa de fermentação natural de 48 horas. Nossas marmitas usam a mesma cozinha e os mesmos ingredientes do salão — nada de fast food.</p>
+        <p class="muted">Aberto todos os dias, das 11h às 23h. Retirada no balcão ou entrega para toda a região.</p>
+      </div>
+      <div class="ticket" style="margin:0;">
+        <div class="ticket-row"><span class="ticket-label">Segunda a sexta</span><span>11h — 23h</span></div>
+        <div class="ticket-row"><span class="ticket-label">Sábado e domingo</span><span>12h — 00h</span></div>
+        <div class="ticket-perforation"></div>
+        <div class="ticket-row"><span class="ticket-label">Retirada de marmitas</span><span>11h — 14h · 18h — 21h</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="contato">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Forno Bella</h4>
+        <p>Rua das Oliveiras, 245 — Jardim Itália, São Paulo/SP</p>
+        <p>Todos os dias, das 11h às 23h.</p>
+      </div>
+      <div>
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a href="tel:+5511999999999">(11) 99999-9999</a></li>
+          <li><a href="agendamento.html">Agendar retirada de marmita</a></li>
+          <li><a href="index.html#cardapio">Ver cardápio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Formas de pagamento</h4>
+        <p>Pix, cartão de crédito/débito e dinheiro na retirada ou entrega.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Forno Bella Pizzaria &amp; Cozinha de Bairro. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<!-- Carrinho lateral -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-head">
+    <h3>Seu pedido</h3>
+    <button type="button" class="cart-close" id="cart-close" aria-label="Fechar carrinho">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-drawer-foot" id="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">R$ 0,00</span></div>
+    <a href="checkout.html" class="btn btn-primary btn-block">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/whatsapp.js"></script>
+<script src="js/main.js"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

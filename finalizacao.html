@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido confirmado — Forno Bella</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Forno Bella
+        <span class="brand-sub">PIZZARIA &amp; COZINHA DE BAIRRO</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="index.html#cardapio">Cardápio</a>
+      <a href="agendamento.html">Retirar marmita</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button type="button" class="cart-btn" data-open-cart>
+        🛒 Carrinho <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="wrap" style="max-width:640px;">
+
+      <div id="final-empty" class="empty-state" style="display:none;">
+        <p style="font-size:2.4rem;">🧾</p>
+        <h3>Nenhum pedido encontrado</h3>
+        <p class="muted">Não encontramos um pedido recente. Que tal ver o cardápio ou agendar a retirada de uma marmita?</p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a href="index.html#cardapio" class="btn btn-primary">Ver cardápio</a>
+          <a href="agendamento.html" class="btn btn-outline">Agendar marmita</a>
+        </div>
+      </div>
+
+      <div id="final-content" style="display:none;">
+        <div class="ticket center-text">
+          <div class="confirm-stamp" aria-hidden="true">✓</div>
+          <h2 id="final-titulo">Pedido confirmado!</h2>
+          <p class="muted">Guarde o número do seu pedido:</p>
+          <div class="order-number">#<span id="final-numero"></span></div>
+
+          <div class="ticket-perforation"></div>
+          <div id="final-detalhes" style="text-align:left;"></div>
+
+          <div class="ticket-perforation"></div>
+          <div id="final-itens" style="text-align:left;"></div>
+
+          <div class="ticket-perforation"></div>
+          <div class="ticket-row total"><span>Total</span><span id="final-total"></span></div>
+        </div>
+
+        <div class="alert alert-info" style="margin-top:24px;">
+          Envie a confirmação pelo WhatsApp para garantirmos seu horário — nossa equipe responde em poucos minutos.
+        </div>
+
+        <a id="final-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">
+          Confirmar pelo WhatsApp
+        </a>
+        <a href="index.html" class="btn btn-outline btn-block" style="margin-top:12px;">Voltar ao início</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">© 2026 Forno Bella Pizzaria &amp; Cozinha de Bairro. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-head">
+    <h3>Seu pedido</h3>
+    <button type="button" class="cart-close" id="cart-close" aria-label="Fechar carrinho">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-drawer-foot" id="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">R$ 0,00</span></div>
+    <a href="checkout.html" class="btn btn-primary btn-block">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/order.js"></script>
+<script src="js/whatsapp.js"></script>
+<script src="js/main.js"></script>
+<script src="js/finalizacao.js"></script>
+</body>
+</html>

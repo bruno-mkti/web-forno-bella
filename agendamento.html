@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar retirada de marmita — Forno Bella</title>
+<meta name="description" content="Agende o dia e horário para retirar sua marmita na Forno Bella, sem espera no balcão.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Forno Bella
+        <span class="brand-sub">PIZZARIA &amp; COZINHA DE BAIRRO</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="index.html">Início</a>
+      <a href="index.html#cardapio">Cardápio</a>
+      <a href="agendamento.html" aria-current="page">Retirar marmita</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#contato">Contato</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button type="button" class="cart-btn" data-open-cart>
+        🛒 Carrinho <span class="cart-count" data-cart-count>0</span>
+      </button>
+      <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Agende a retirada da sua marmita</h1>
+      <p>Escolha a marmita, o dia e o horário. Sua marmita fica pronta quentinha, sem fila no balcão.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div><h4>Escolha a marmita</h4><p>Selecione o sabor e a quantidade desejada.</p></div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div><h4>Escolha data e horário</h4><p>Dois turnos disponíveis: almoço e jantar.</p></div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div><h4>Confirme seus dados</h4><p>Retire no balcão no horário agendado.</p></div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <form id="form-agendamento" novalidate>
+
+          <h3>Sua marmita</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="ag-marmita">Sabor da marmita</label>
+              <select id="ag-marmita"></select>
+            </div>
+            <div class="field">
+              <label for="ag-quantidade">Quantidade</label>
+              <input type="number" id="ag-quantidade" min="1" max="20" value="1" required>
+            </div>
+          </div>
+
+          <h3>Data e horário de retirada</h3>
+          <div class="field">
+            <label for="ag-data">Data da retirada</label>
+            <input type="date" id="ag-data" required>
+          </div>
+          <div class="field">
+            <label>Horário disponível</label>
+            <div class="time-slots" id="time-slots"></div>
+            <p class="field-error" id="erro-horario" style="display:none;">Selecione um horário de retirada.</p>
+            <p class="field-hint">Retirada das 11h às 14h (almoço) e das 18h às 21h (jantar).</p>
+          </div>
+
+          <h3>Seus dados</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="ag-nome">Nome completo</label>
+              <input type="text" id="ag-nome" required>
+              <p class="field-error">Informe seu nome completo.</p>
+            </div>
+            <div class="field">
+              <label for="ag-telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="ag-telefone" placeholder="(11) 99999-9999" required>
+              <p class="field-error">Informe um telefone válido.</p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="ag-observacoes">Observações (opcional)</label>
+            <textarea id="ag-observacoes" rows="3" placeholder="Ex.: sem cebola, embalagem extra, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Confirmar agendamento</button>
+        </form>
+
+        <aside class="sticky-col">
+          <div class="ticket">
+            <h3 style="margin-bottom:2px;">Resumo</h3>
+            <p class="muted" style="font-size:.85rem;">Sua marmita é preparada na hora da retirada.</p>
+            <div class="ticket-perforation"></div>
+            <div class="ticket-row"><span class="ticket-label">Retirada</span><span>No balcão da loja</span></div>
+            <div class="ticket-row"><span class="ticket-label">Pagamento</span><span>Na retirada</span></div>
+            <div class="ticket-perforation"></div>
+            <p class="field-hint">Prefere pedir por telefone? Fale com a gente pelo botão de WhatsApp no canto da tela.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom">© 2026 Forno Bella Pizzaria &amp; Cozinha de Bairro. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-head">
+    <h3>Seu pedido</h3>
+    <button type="button" class="cart-close" id="cart-close" aria-label="Fechar carrinho">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-drawer-foot" id="cart-foot">
+    <div class="cart-total-row"><span>Total</span><span id="cart-total">R$ 0,00</span></div>
+    <a href="checkout.html" class="btn btn-primary btn-block">Finalizar pedido</a>
+  </div>
+</aside>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/order.js"></script>
+<script src="js/whatsapp.js"></script>
+<script src="js/main.js"></script>
+<script src="js/agendamento.js"></script>
+</body>
+</html>

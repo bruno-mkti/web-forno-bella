@@ -30,6 +30,39 @@ function montarMensagemWhatsapp(pedido) {
     `Total: ${formatarPreco(pedido.total)}`;
 }
 
+/* ---------- GA4 / GTM: dataLayer ---------- */
+
+window.dataLayer = window.dataLayer || [];
+
+function dispararEventoPurchase(pedido) {
+  // Trava para não contar a mesma compra de novo se o cliente atualizar
+  // (F5) ou voltar para esta página de finalização.
+  const chave = `ga4_purchase_${pedido.numero}`;
+  try {
+    if (window.sessionStorage.getItem(chave)) return;
+    window.sessionStorage.setItem(chave, "1");
+  } catch (e) {
+    // Sem sessionStorage disponível: segue sem a trava.
+  }
+
+  window.dataLayer.push({ ecommerce: null });
+  window.dataLayer.push({
+    event: "purchase",
+    ecommerce: {
+      transaction_id: pedido.numero,
+      currency: "BRL",
+      value: Number(pedido.total.toFixed(2)),
+      shipping: Number((pedido.taxaEntrega || 0).toFixed(2)),
+      items: pedido.itens.map(item => ({
+        item_id: item.id,
+        item_name: item.nome,
+        price: item.preco,
+        quantity: item.quantidade,
+      })),
+    },
+  });
+}
+
 function renderizarFinalizacao() {
   const pedido = lerPedido();
   const conteudo = document.getElementById("final-content");
@@ -42,6 +75,8 @@ function renderizarFinalizacao() {
   }
   if (conteudo) conteudo.style.display = "block";
   if (vazio) vazio.style.display = "none";
+
+  dispararEventoPurchase(pedido);
 
   document.getElementById("final-numero").textContent = pedido.numero;
 

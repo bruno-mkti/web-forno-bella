@@ -123,6 +123,17 @@ function iniciarFormularioAgendamento() {
     };
 
     salvarPedido(pedido);
+
+    // Disparo do evento para o Google Tag Manager (GTM)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'agendamento_concluido',
+      'value': produto.preco * qtd,
+      'currency': 'BRL',
+      'marmita_sabor': produto.nome,
+      'marmita_quantidade': qtd
+    });
+
     window.location.href = "finalizacao.html";
   });
 }

@@ -70,10 +70,59 @@ function carrinhoAdicionar(produtoId, quantidade = 1) {
     });
   }
   carrinhoSalvar(itens);
+  dispararEventoAddToCart(produto, quantidade);
+}
+
+/* ---------- GA4 / GTM: dataLayer ---------- */
+
+window.dataLayer = window.dataLayer || [];
+
+function dispararEventoAddToCart(produto, quantidade) {
+  // Limpa o objeto "ecommerce" anterior antes de empurrar um novo,
+  // conforme recomendação do próprio Google para evitar que valores
+  // de eventos anteriores "vazem" para este evento.
+  window.dataLayer.push({ ecommerce: null });
+  window.dataLayer.push({
+    event: "add_to_cart",
+    ecommerce: {
+      currency: "BRL",
+      value: Number((produto.preco * quantidade).toFixed(2)),
+      items: [
+        {
+          item_id: produto.id,
+          item_name: produto.nome,
+          price: produto.preco,
+          quantity: quantidade,
+        },
+      ],
+    },
+  });
+}
+
+function dispararEventoRemoveFromCart(produto, quantidade) {
+  window.dataLayer.push({ ecommerce: null });
+  window.dataLayer.push({
+    event: "remove_from_cart",
+    ecommerce: {
+      currency: "BRL",
+      value: Number((produto.preco * quantidade).toFixed(2)),
+      items: [
+        {
+          item_id: produto.id,
+          item_name: produto.nome,
+          price: produto.preco,
+          quantity: quantidade,
+        },
+      ],
+    },
+  });
 }
 
 function carrinhoAtualizarQuantidade(produtoId, quantidade) {
   let itens = carrinhoObter();
+  const itemAtual = itens.find(i => i.id === produtoId);
+  const quantidadeAnterior = itemAtual ? itemAtual.quantidade : 0;
+
   if (quantidade <= 0) {
     itens = itens.filter(i => i.id !== produtoId);
   } else {
@@ -81,11 +130,28 @@ function carrinhoAtualizarQuantidade(produtoId, quantidade) {
     if (item) item.quantidade = quantidade;
   }
   carrinhoSalvar(itens);
+
+  // Usa os botões +/- do drawer para refletir a variação real:
+  // aumento dispara add_to_cart, redução dispara remove_from_cart,
+  // ambos só com a quantidade que efetivamente mudou.
+  if (itemAtual) {
+    const diferenca = quantidade - quantidadeAnterior;
+    if (diferenca > 0) {
+      dispararEventoAddToCart(itemAtual, diferenca);
+    } else if (diferenca < 0) {
+      dispararEventoRemoveFromCart(itemAtual, Math.abs(diferenca));
+    }
+  }
 }
 
 function carrinhoRemover(produtoId) {
-  const itens = carrinhoObter().filter(i => i.id !== produtoId);
-  carrinhoSalvar(itens);
+  const itens = carrinhoObter();
+  const item = itens.find(i => i.id === produtoId);
+  const restantes = itens.filter(i => i.id !== produtoId);
+  carrinhoSalvar(restantes);
+  if (item) {
+    dispararEventoRemoveFromCart(item, item.quantidade);
+  }
 }
 
 function carrinhoLimpar() {
@@ -163,9 +229,29 @@ function renderizarDrawerCarrinho() {
   });
 }
 
+function dispararEventoViewCart() {
+  const itens = carrinhoObter();
+  if (itens.length === 0) return;
+  window.dataLayer.push({ ecommerce: null });
+  window.dataLayer.push({
+    event: "view_cart",
+    ecommerce: {
+      currency: "BRL",
+      value: Number(carrinhoSubtotal().toFixed(2)),
+      items: itens.map(item => ({
+        item_id: item.id,
+        item_name: item.nome,
+        price: item.preco,
+        quantity: item.quantidade,
+      })),
+    },
+  });
+}
+
 function abrirCarrinho() {
   document.getElementById("cart-overlay")?.classList.add("is-open");
   document.getElementById("cart-drawer")?.classList.add("is-open");
+  dispararEventoViewCart();
 }
 
 function fecharCarrinho() {

@@ -60,8 +60,35 @@ function validarCampo(campo, condicaoValida) {
   return condicaoValida;
 }
 
+/* ---------- GA4 / GTM: dataLayer ---------- */
+
+window.dataLayer = window.dataLayer || [];
+
+function dispararEventoBeginCheckout() {
+  const itens = carrinhoObter();
+  if (itens.length === 0) return;
+  window.dataLayer.push({ ecommerce: null });
+  window.dataLayer.push({
+    event: "begin_checkout",
+    ecommerce: {
+      currency: "BRL",
+      value: Number(carrinhoSubtotal().toFixed(2)),
+      items: itens.map(item => ({
+        item_id: item.id,
+        item_name: item.nome,
+        price: item.preco,
+        quantity: item.quantidade,
+      })),
+    },
+  });
+}
+
 function iniciarCheckout() {
   renderizarResumoCheckout();
+  // Dispara só na carga inicial da página — não a cada atualização do
+  // carrinho (troca de quantidade, endereço etc.), para não gerar
+  // vários begin_checkout duplicados na mesma visita.
+  dispararEventoBeginCheckout();
   document.addEventListener("carrinho:atualizado", renderizarResumoCheckout);
 
   document.querySelectorAll('input[name="entrega"]').forEach(radio => {
